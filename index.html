@@ -5,6 +5,10 @@
 <title>Hello Nupur</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -14,6 +18,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  overflow: hidden;
 }
 
 .card {
@@ -22,6 +27,7 @@ body {
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   max-width: 420px;
+  position: relative;
 }
 
 h1, h2 {
@@ -41,6 +47,8 @@ p {
 
 .buttons {
   margin-top: 30px;
+  position: relative;
+  height: 80px;
 }
 
 button {
@@ -49,20 +57,24 @@ button {
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  margin: 10px;
+  position: absolute;
 }
 
 #yes {
   background: #ff4d6d;
   color: white;
+  left: 20%;
 }
 
 #no {
   background: #ddd;
+  left: 55%;
 }
 
 img {
   width: 100%;
+  max-height: 300px;
+  object-fit: cover;
   border-radius: 15px;
   margin-top: 20px;
 }
@@ -75,7 +87,6 @@ img {
 
 <body>
 
-<!-- Background Music -->
 <audio autoplay loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_78c3c43bfa.mp3" type="audio/mpeg">
 </audio>
@@ -96,7 +107,7 @@ img {
 
   <div class="buttons">
     <button id="yes" onclick="goToFinal()">Yes 💕</button>
-    <button id="no" onmouseover="moveNo()">Let me think 😌</button>
+    <button id="no" onmouseenter="moveNo()" ontouchstart="moveNo()">Let me think 😌</button>
   </div>
 
   <div class="signature">— Utkarsh</div>
@@ -109,20 +120,30 @@ img {
     I knew it.<br>
     And I just want you to know…
     <br><br>
-    This is only the beginning 💫
+    This is only the beginning ✨
   </p>
 
   <img src="./photo.jpg" alt="Us ❤️">
 
-  <p class="signature">Happy Valentine’s Day 💖<br>— Utkarsh</p>
+  <p class="signature">
+    Happy Valentine’s Day 💖<br>
+    — Utkarsh
+  </p>
 </div>
 
 <script>
 function moveNo() {
   const btn = document.getElementById("no");
-  btn.style.position = "absolute";
-  btn.style.top = Math.random() * window.innerHeight + "px";
-  btn.style.left = Math.random() * window.innerWidth + "px";
+  const parent = btn.parentElement;
+
+  const maxX = parent.offsetWidth - btn.offsetWidth;
+  const maxY = parent.offsetHeight - btn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
 }
 
 function goToFinal() {
